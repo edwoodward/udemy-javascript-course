@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var printer = {color: 'black', wireless: true, scanner: true, copier: true};
+        for(property in printer) {
+            document.write(property);
+            document.write(": ");
+            document.write(printer[property]);
+            document.write("<br/>");
+        }
+
+        //var printer = {color: 'black', wireless: true, scanner: true, copier: true};
+        //console.log(printer);
+
+
+        // var animals = ['dog', 'cat', 'cow', 'horse','chicken', 'zebra', 'giraffe', 'elephant'];
+        // for(var x in animals) {
+        //     document.write('Array index: ' + x);
+        //     document.write('Array value: ' + animals[x]);
+        //     document.write("<br/>");
+        // }
+
+        //var animals = ['dog', 'cat', 'cow', 'horse','chicken', 'zebra', 'giraffe', 'elephant'];
+        // var num = prompt('Please enter a number');
+        // if(Number(num) < animals.length) {
+        //     alert("The animal selected is " + animals[Number(num)]);
+        // }
+        // else {
+        //     alert("No animal was found to match your number");
+        // }
+        // var animal = prompt('Select an animal: dog, cat, cow, horse, chicken, zebra, giraffe or elephant');
+        // index = animals.indexOf(animal);
+        // if(index < 0) {
+        //     alert("No index was found to match your animal");
+        // }
+        // else {
+        //     alert("The index of the selected animal is " + index);
+        // }
+
+        //var animals = ['dog', 'cat', 'rabbit', 'bird'];
+        //animals[9] = 'sheep';
+        //animals[8] = 'dog';
+        //animals[7] = 'rabbit';
+        //animals.fill('fish',0,7);
+        //animals.unshift('horse');
+        //document.write('New Array: ' + animals);
+
+        //var animals = ['dog', 'cat', 'cow', 'horse','chicken', 'zebra', 'giraffe', 'elephant'];
+        //document.write("original array: " + animals);
+        //document.write("<br/>");
+        //document.write("original array sorted in reverse order: " + animals.sort().reverse());
+        // i = 0;
+        // while(i < animals.length) {
+        //     //var currentAnimal = animals[Math.floor(Math.random() * 4)]
+        //     document.write("Current Animal is " + animals[Math.floor(Math.random() * 5)]);
+        //     document.write("<br/>");
+        //     i++;
+        // } 
+    </script>
+    
+</body>
+</html>

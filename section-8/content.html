@@ -1,0 +1,327 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content</title>
+  <style>
+    .box {
+      height: 100px;
+      width: 100px;
+      display: inline-block;
+      border: 1px solid black;
+      text-align: center;
+    }
+
+    #getElement {
+      background-color: red;
+    }
+
+    .btn {
+      height: 50px;
+      width: 100px;
+      background-color: darkcyan;
+      color:white;
+    }
+  </style>
+</head>
+<body id="body">
+  <div id='wrapper'></div>
+
+  <input type='button' class='btn' onclick="start()" value='Start'>
+  <div id='msg1'>Welcome</div>
+  <div id='msg2'>Click the Start button</div>
+  <br/>
+  <h3>Drag and Drop</h3>
+  <div class="box" ondrop="startDrop()" ondragover="noDrop()">1
+    <div id="getElement" ondrag="startDrag()" draggable="true"> Drag me please</div>
+  </div>
+
+  <div class="box" ondrop="startDrop()" ondragover="noDrop()">2</div>
+
+  <!--<form onsubmit="validateForm()">
+    <div>
+      First Name: <input type='text' id='fn'>
+    </div>
+    <div>
+      Last Name: <input type='text' id='ln'>
+    </div>
+    <div>
+      <input type='submit' id='btn' value='Submit'>
+    </div>
+
+  </form>-->
+
+  <!--Numbers only: <input type='text' id='num' onkeypress="return captureKey()" onpaste="return false">
+  Letters only: <input type='text' id='letters' onkeypress="return captureLetterKey()" onpaste="return false">-->
+  <br/>
+  <h3>Image size</h3>
+  Select a size: <select name="operation" id="op" onchange="setSize()">
+    <option value="">select</option>
+    <option value="150x50">Small</option>
+    <option value="350x50">Medium</option>
+    <option value="500x50">Large</option>
+  </select>
+  <input type='color' id='color' onchange="setSize()">
+  <div>
+    <img src="https://via.placeholder.com/150/2288FF/FFFFFF" id="swap" onmouseover="changeImg(this)" onmouseout="changeImg(this)">
+  </div>
+  <br/>
+  <h3>Blinking image</h3>
+  <div>
+    <img src="" id="image">
+  </div>
+  
+
+  <!--<form action="" name="nameForm">
+    <div>
+      First Name: <input type='text' id='fn' onchange="printFirstName(this)">
+    </div>
+    <div>
+      Last Name: <input type='text' id='ln' onchange="printFirstName(this)">
+    </div>
+    <div>
+      <input type='button' id='btn' onclick="sendInfo()" value='Submit'>
+    </div>
+  </form>-->
+
+
+<!--  <img src="https://via.placeholder.com/150/2288FF/FFFFFF" id="image" onmouseover="changeImg(this)" onmouseout="changeImg(this)">-->
+ 
+  <!--<form>
+    <input type='button' id='btn1' value='button 1'>
+    <input type='button' id='btn2' value='button 2'>
+    <input type='button' id='btn3' value='button 3'>
+  </form>-->
+
+  <!--onClick event
+  <button onclick="prompt('Click ok if you think this is stupid')">Prompt</button>
+  <button onclick="alert('Click ok if you think this is stupid')">Alert</button>
+  <button onclick="print()">Print</button>-->
+
+  <script src="content.js">
+    // var output = document.getElementById('wrapper');
+    //
+    // var holder = [];
+    // var names = ['Ed', 'Mary', 'Bob', 'Cindy', 'Jessica', 'Scott']
+    // var nameToLookFor;
+    //
+    // function start() {
+    //   setNameToLookFor();
+    //   document.getElementById('msg2').innerHTML = 'Guess selected name by clicking on the box';
+    //   holder = names.slice();
+    //   holder.sort(function(a,b){
+    //     return 0.5 - Math.random()
+    //   });
+    //   buildBoxes();
+    // }
+    //
+    // function buildBoxes() {
+    //
+    //   let body = document.getElementById('body');
+    //
+    //   for(var x in holder) {
+    //     let divElement = document.createElement('div');
+    //     divElement.setAttribute('class', 'box');
+    //     divElement.setAttribute('onmouseover', 'updateText(this, "' + holder[x] +'")');
+    //     divElement.setAttribute('onmouseout', 'updateText(this, "Hidden")');
+    //     divElement.setAttribute('onclick', 'handleClick(this)');
+    //     divElement.innerHTML = 'Hidden ' + x;
+    //     body.appendChild(divElement);
+    //
+    //   }
+    // }
+    //
+    // function updateText(t, text) {
+    //   t.innerHTML = text;
+    // }
+    //
+    // function setNameToLookFor() {
+    //   nameToLookFor = names[Math.floor(Math.random() * Math.floor(names.length))];
+    // }
+    //
+    // function handleClick(t) {
+    //   if(nameToLookFor === t.innerHTML) {
+    //     document.getElementById('msg1').innerHTML = 'Yay!!';
+    //     document.getElementById('msg2').innerHTML = 'You guessed correctly! The name to guess was ' + nameToLookFor;
+    //   }
+    //   else {
+    //     document.getElementById('msg1').innerHTML = 'Sad Trombone';
+    //     document.getElementById('msg2').innerHTML = t.innerHTML + ' was not the correct answer'
+    //
+    //   }
+    // }
+
+
+    // drag and drop
+    // var targetHolder;
+    // function startDrag() {
+    //   output.innerHTML = 'Drag started';
+    //   targetHolder = event.target;
+    // }
+    //
+    // function noDrop() {
+    //   event.preventDefault();
+    // }
+    //
+    // function startDrop() {
+    //   event.preventDefault();
+    //   output.innerHTML = 'Dropped';
+    //   if(event.target.className==='box') {
+    //     event.target.appendChild(targetHolder);
+    //   }
+    // }
+
+    //validate form
+    // function validateForm() {
+    //   event.preventDefault();
+    //   let errors = '';
+    //   //console.dir(event);
+    //   console.log(event.target.fn.value);
+    //   console.log(event.target.ln.value);
+    //   if(event.target.fn.value ==="") {
+    //     errors = 'First name is required';
+    //   }
+    //   if(event.target.ln.value ==="") {
+    //     errors += ' last name is required';
+    //   }
+    //   if(!(errors==='')) {
+    //     output.innerHTML = errors;
+    //     return false;
+    //   }
+    //   return true;
+    //
+    // }
+
+    //key events
+    // function captureKey() {
+    //   return !isNaN(event.key);
+    // }
+    //
+    // function captureLetterKey() {
+    //   return isNaN(event.key);
+    // }
+
+    //image carousel
+    // var images = ['1', '2', '3', '4', '5'];
+    // var colors = ['111', '222', 'ff0000', '0000FF', '333'];
+    // let colorChoice = 0;
+
+
+    // (function(){
+    //   window.setTimeout(swapImage, 3000);
+    // })();
+    //
+    // function swapImage() {
+    //
+    //   if(colorChoice < images.length) {
+    //     let image = document.getElementById('image');
+    //     image.src = 'https://via.placeholder.com/350x50/' + colors[colorChoice] + '/fff?text=image' + images[colorChoice];
+    //     colorChoice++;
+    //     window.setTimeout(swapImage, 3000);
+    //   }
+    //   // else {
+    //   //   colorChoice = 0;
+    //   //   //window.setTimeout(swapImage, 3000);
+    //   // }
+    // }
+
+
+    // function setSize() {
+    //   let op = document.getElementById('op');
+    //   let image = document.getElementById('image');
+    //   let color = document.getElementById('color');
+    //   image.src = 'https://via.placeholder.com/' + op.value + '/' + color.value.substring(1) + '/';
+    // }
+    
+    // function printName(t) {
+    //   //console.dir(t);
+    //   if(t.id === 'fn'){
+    //     output.innerHTML = 'First Name: ' + t.form.fn.value;
+    //   }
+    //   else {
+    //     output.innerHTML = 'Last Name: ' + t.form.ln.value;
+    //   }
+    //   //output.innerHTML = document.nameForm.fn.value;
+    //
+    // }
+
+    // function sendInfo() {
+    //   //console.dir(e);
+    //   output.innerHTML = 'Name: ' + document.nameForm.fn.value + " " + document.nameForm.ln.value;
+    // }
+
+    // function changeImg(t){
+    //   if(t.src === 'https://via.placeholder.com/150/2288FF/FFFFFF') {
+    //     t.src = 'https://via.placeholder.com/150/FFFF00/000000';
+    //   }
+    //   else
+    //   {
+    //     t.src = 'https://via.placeholder.com/150/2288FF/FFFFFF';
+    //   }
+    //
+    // }
+
+
+
+    // (function(){
+    //     document.getElementById('btn1').onclick = function() {
+    //     output.innerHTML = 'WORKED';
+    //   }
+    //     document.getElementById('btn2').onclick = function() {
+    //     output.innerHTML = 'WORKED AGAIN';
+    //   }
+    //     document.getElementById('btn3').onclick = function() {
+    //     output.innerHTML = 'THIRD TIME IS THE CHARM';
+    //   }
+    // })();
+
+    // document.getElementById('btn1').onclick = function() {
+    //   output.innerHTML = 'WORKED'
+    // }
+
+
+
+    // function sendToURL2() {
+    //   //alert('1');
+    //   //var url = document.urlForm.url.value;
+    //   //alert('2');
+    //   //output.innerHTML = url;
+    //   //alert('3');
+    //   window.location = document.urlForm.url.value;
+    // }
+
+    //location without using form
+    // function sendToURL() {
+    //   var url = document.getElementById('url');
+    //   window.location = url.value;
+    // }
+
+    //navigator object
+    // (function(){
+    //   output.innerHTML = navigator.userAgent;
+    // })();
+
+    //set a timer
+    // var timer;
+
+    // function startTimer(){
+    //   timer = window.setTimeout(popup, 3000);
+    // }
+
+    // function clearTimer() {
+    //   window.clearInterval(timer);
+    // }
+
+    // function popup() {
+    //   alert('Surprise!!!');
+    // }
+
+    //Playing with window object
+    //output.innerHTML = 'width: ' + window['innerWidth'] + ' height: ' + window['innerHeight'];
+    // output.innerHTML = 'width: ' + window.innerWidth + ' height: ' + window.innerHeight;
+    // output.innerHTML += '<br/> location: ' + window.location;
+
+  </script>
+  
+</body>
+</html>

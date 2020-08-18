@@ -1,0 +1,115 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='output'>Test Entry</div>
+  <script>
+    var output = document.getElementById("output");
+    var reply = prompt('Rock, Paper of Scissors? (R, P or S)');
+    repyFirstChar = reply.charAt(0).toUpperCase();
+    var rand = Math.random();
+    var computer = 'Scissors';
+    if(rand < 0.34) {
+      computer = 'Rock';
+    }
+    else if (rand < 0.67 ) {
+      computer = 'Paper';
+    }
+    computerFirstChar = computer.charAt(0);
+
+    var html = 'Tie game';
+    if(reply == 'Rock' && computer =='Paper') {
+      html = 'You lose. Paper beats rock'
+    }
+
+
+    // magic 8 ball
+    // var responses = [
+    //   'It is certain.',
+    //   'Without a doubt.',
+    //   'Reply hazy, try again',
+    //   'Cannot predict now',
+    //   'Don\'t count on it',
+    //   'My sources say no'
+    // ];
+    // var rand = Math.floor(Math.random() * Math.floor(6)); 
+    // output.innerHTML = reply + ' : ' + responses[rand];
+
+    //coin toss
+    // var result = 0
+    // switch(reply) {
+    //   case 'heads':
+    //     result = 0;
+    //     break;
+    //   case 'tails': 
+    //     result = 1;
+    //     break;
+    // }
+    // var rand = Math.floor(Math.random() * Math.floor(3));
+    // var html;
+    
+    // if(rand == result) {
+    //   html = 'You win! ';
+    // }
+    // else {
+    //   html = 'You lost! ';
+    // }
+    // output.innerHTML = html + 'The coin landed on ' + (rand == 0 ? 'heads' : 'tails')
+
+
+    // var html;
+    // switch(time) {
+    //   case "wake up":
+    //     html = '8';
+    //     break;
+    //   case "lunch":
+    //     html = '12';
+    //     break;
+    //   case "dinner":
+    //     html = '20';
+    //     break;
+    //   default:
+    //     html = '0';
+    // }
+
+    // output.innerHTML = 'The time is ' + html;
+    // if(time >= 8 && time < 12) {
+    //   output.innerHTML = 'Wakup! Its morning'
+    // }
+    // else if(time == 13){
+    //   output.innerHTML = 'Go to work'
+    // }
+    // else if(time > 12 && time < 13) {
+    //   output.innerHTML = 'Go to lunch'
+    // }
+    // else if(time > 16 && time < 20) {
+    //   output.innerHTML = 'Dinner time'
+    // }
+    // else if(time == 22) {
+    //   output.innerHTML = 'bedtime'
+    // }
+    // else {
+    //   output.innerHTML = 'Past your bed time. Go to sleep'
+    // }
+    //var userNames = ['Ed', 'Tony','Carol', 'Jessica', 'Stan', 'Jan', 'Hope', 'Fred'];
+    //var reply = prompt('Enter a user name');
+    //if(userNames.indexOf(reply) < 0) {
+    //  html = ' Not Found'
+    //}
+    //else {
+    //  html = ' Found'
+    //}
+    //output.innerHTML = reply + html;
+
+    //output.innerHTML = userNames.indexOf(reply) < 0 ? reply + ' Not found' : reply + ' Found';
+
+    //var login = true;
+    //var outputHolder = '';
+    //var userOK = login ? outputHolder = 'true' : outputHolder = 'false';
+    //output.innerHTML = outputHolder;
+  </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+<!--        <script src="party.json"></script>-->
+        <style>
+        
+        </style>
+    </head>
+    <body>
+        
+        Guest Name: <input type="'text" id="guest">
+        Number of Guests: <input type="number" id="guestNum" value="0">
+        <input type="button" value="Add">
+        <div id="msg"></div>
+        
+        <script>
+            //console.log(data);
+            let guests = [];
+            let msg = document.getElementById('msg');
+            let html = '';
+            
+            window.addEventListener('load', (event) => {
+                init();
+            });
+            
+            function init() {
+                loadJSON(function(response){
+                    guests = JSON.parse(response);
+                    guestList();
+                    
+                },'http://discoveryvip.com/shared/json.php?f=party')
+            }
+
+            function loadJSON(callback, url) {
+                console.log('loadjson called');
+                let xHR = new XMLHttpRequest;
+                xHR.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log('----1-----');
+                        callback(this.responseText);
+                    }
+                    else {
+                        console.log('----2-----');
+                        return false;
+                    }
+                }
+                console.log('----3-----');
+                xHR.open('GET', url, true);
+                xHR.send();
+                //console.log(xHR);
+            }
+            
+            // document.querySelector('input[value="Add"]').addEventListener('click', function(){
+            //     let name = document.getElementById('guest');
+            //     let guestNum = document.getElementById('guestNum');
+            //     //let json = { "name" : name.value, "guests" : guestNum.value, "status" : false }
+            //     guests.push({ name : name.value, guests : Number(guestNum.value), status : false });
+            //     guestList()
+            //     name.value = '';
+            //     guestNum.value = 0;
+            //     //console.log(json);
+            // })
+            //
+            function guestList() {
+                console.log('guestlist called');
+                html = '';
+                
+                for(let i = 0; i < guests.length; i++){
+                    let sym = '&#10007;';
+                    if(guests[i].status === true){
+                        sym = '&#10003;';
+                    }
+                    html += '<div class="toggle" data-id="' + i + '" data-person="' + guests[i].name +'" >' + sym + ' ' + guests[i].name + ' +' + guests[i].guests + '</div>';
+                    console.log('HTML: ' + html);
+                }
+                msg.innerHTML = html;
+            }
+            
+            
+        
+        </script>
+    
+    </body>
+</html>

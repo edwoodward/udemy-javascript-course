@@ -1,0 +1,234 @@
+<html>
+    <head>
+        <style>
+            .btn {
+                background-color: red;
+                text-align: center;
+                border-radius: 10px;
+                font-size: 1em;
+                padding: 15px;
+                color: white;
+            }
+            
+            .btn.hover {
+                background-color: crimson;
+            }
+            
+            .gameTile {
+                display: inline-block;
+                padding: 3px
+            }
+            
+            .flipImage {
+                max-width: 100px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="msg"></div>
+        <div id="wrapper">
+            <div id="start" class="btn">Start</div>
+            <div id="score"></div>
+            <div id="message"></div>
+            <div id="gameboard"></div>
+        </div>
+        
+        
+        <!--<form>
+            <p id="text">
+                UNIX-like systems are amazing operating system designs. Even after many decades, the
+                UNIX-style architecture for operating systems serves as one of the best designs. One of the
+                most important features of this architecture is the command-line interface or the shell. The
+                shell environment helps users to interact with and access core functions of the operating
+                system. The term scripting is more relevant in this context. Scripting is usually supported by
+                interpreter-based programming languages. Shell scripts are files in which we write a sequence
+                of commands that we need to perform. And the script file is executed using the shell utility.
+            </p>
+&lt;!&ndash;            <input type="number" id="digits" value="12345">&ndash;&gt;
+            Find: <input type="text" id="find"><br/>
+            Replace: <input type="text" id="replace"><br/>
+            <input type='button' id="btn1" onclick="findAndReplace()" value="Finc and Replace">
+        </form>-->
+    
+        <script>
+            //game
+            let msg = document.getElementById('msg');
+            let message = document.getElementById('message');
+            let score = document.getElementById('score');
+            let gameBoard = document.getElementById('gameboard');
+            let playLockout = false;
+            let gamePlay = false;
+            let tileImages = [];
+            let tileArray = [];
+            let tilesFlipped = [];
+            let cardFlipped = -1
+            let timer;
+            
+            document.getElementById('start').addEventListener('click',function(){
+                startGame();
+            });
+            
+            function startGame() {
+                document.getElementById('start').style.visibility='hidden';
+                msg.innerHTML = 'It is working';
+                if(!gamePlay) {
+                    gamePlay = true;
+                    buildTilesArray();
+                    tileArray = tileImages.concat(tileImages);
+                    shuffleTiles(tileArray);
+                    buildBoard();
+                }
+            }
+            
+            function buildTilesArray() {
+                for(let i = 0;i<7;i++) {
+                    tileImages.push(i+'.jpg');
+                }
+            }
+
+            function shuffleTiles(tileImages) {
+                for(var x = 0; x < tileImages.length; x++) {
+                    var rand = Math.floor(Math.random() * Math.floor(tileImages.length - 1));
+                    var temp = tileImages[x];
+                    tileImages[x] = tileImages[rand];
+                    tileImages[rand] = temp;
+                }
+            }
+            
+            function buildBoard() {
+                let html = '';
+                let x = 0;
+                tileArray.forEach(function(e) {
+                    html += '<div class="gameTile">';
+                    html += ' <img id="card' + x + '" src="http://via.placeholder.com/150/000000/ffffff?text=click" ' +
+                        'onclick="pickCard(' + x + ',this)" class="flipImage"></div>';
+                    x++;
+                    
+                })
+                //console.log(html);
+                gameBoard.innerHTML = html;
+            }
+            
+            function pickCard(index, t) {
+                if(!playLockout && !isInArray(t.id, tilesFlipped)) {
+                    if (cardFlipped >= 0) {
+                        cardFlip(index, t);
+                        playLockout = true;
+                        if (isAMatch()) {
+                            msg.innerHTML = 'Match Found!';
+                            cardFlipped = -1;
+                            playLockout = false;
+                            checkGameOver();
+                        } else {
+                            msg.innerHTML = 'No match';
+                            timer = setInterval(hideCard, 1000);
+                        }
+                    } else {
+                        cardFlipped = index;
+                        cardFlip(index, t);
+                    }
+                }
+            }
+            
+            function isInArray(index, array) {
+                return array.indexOf(index) > -1;
+            }
+            
+            function cardFlip(index, target){
+                target.src = "http://via.placeholder.com/250/ffffff/000000?text=" + tileArray[index];
+                tilesFlipped.push(target.id);
+            }
+            
+            function hideCard() {
+                for (var x = 0; x < 2; x++) {
+                    var vid = tilesFlipped.pop();
+                    document.getElementById(vid).src = 'http://via.placeholder.com/250/000000/ffffff?text=click';
+                }
+                clearInterval(timer);
+                cardFlipped = -1;
+                playLockout = false;
+                msg.innerHTML = "Select Again";
+            }
+            
+            function checkSrc(src) {
+                return document.getElementById(src).src
+            }
+            
+            function checkGameOver() {
+                if(tilesFlipped.length === tileArray.length){
+                    msg.innerHTML = 'Game Over!';
+                    document.getElementById('start').style.visibility='visible';
+                    gamePlay = false;
+                    tilesFlipped = [];
+                    tileArray = [];
+                    tileImages = [];
+
+                }
+            }
+            
+            function isAMatch() {
+                checkSrc(tilesFlipped[tilesFlipped.length - 1]) === checkSrc(tilesFlipped[tilesFlipped.length - 2])
+            }
+            
+            
+            
+            
+            //Arrays using arguments
+            // var names = ['Ed', 'Mary', 'Bob', 'Cindy', 'Jessica', 'Scott']
+            //
+            // function showNames() {
+            //     console.log(arguments);
+            //     console.log(arguments[0][0]);
+            // }
+            //
+            // showNames(names);
+            
+            
+            // function findAndReplace() {
+            //     let text = document.getElementById('text');
+            //     let find = document.getElementById('find');
+            //     let replaceStr = document.getElementById('replace');
+            //     //only replaces the first one
+            //     //let newText = text.innerHTML.replace(find.value, replaceStr.value);
+            //     //replaces all
+            //     let newText = text.innerHTML.split(find.value).join(replaceStr.value);
+            //     text.innerHTML = newText;
+            //
+            // }
+            
+            
+            //validate using REGEX
+            // function validate() {
+            //     let digits = document.getElementById('digits');
+            //     let email = document.getElementById('email');
+            //     let chars = document.getElementById('chars');
+            //     const EMAIL_REGEX = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+            //     const NUMBER_ONLY_REGEX = /^\d+$/;
+            //     const LETTER_ONLY_REGEX = /^[a-zA-Z]+$/;
+            //     let returnMsg = 'All items are valid';
+            //     if(!EMAIL_REGEX.test(email.value)) {
+            //         returnMsg = 'Email is not valid<br/>';
+            //     }
+            //     if(!NUMBER_ONLY_REGEX.test(digits.value)) {
+            //         returnMsg += "Digits is not valid<br/>";
+            //     }
+            //     if(!LETTER_ONLY_REGEX.test(chars.value)) {
+            //         returnMsg += 'Chars is not valid';
+            //     }
+            //     msg.innerHTML = returnMsg;
+            //
+            // }
+            
+            //validate email
+            // function regexFunction() {
+            //     var email = document.getElementById('email');
+            //     let re = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+            //     let results = re.test(email.value);
+            //     console.log(results);
+            //
+            // }
+        
+        </script>
+    </body>
+</html>

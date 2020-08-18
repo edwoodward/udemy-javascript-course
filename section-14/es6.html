@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>ES 6</title>
+    </head>
+    <body>
+        <div id="msg"></div>
+        <form id="calForm">
+            <div>
+                Female: <input type="radio" id="female">
+                Male: <input type="radio" id="male">
+            </div>
+            <div>
+                Weight: <input type="number" value="150" id="weight"> lbs
+            </div>
+            <div>
+                Height:
+                <input type="number" id="heightFeet" value="5"> Feet
+                <input type="number" min="0" max="11" id="heightInches" value="5"> Inches
+            </div>
+            <div>
+                Age: <input type="number" id="age" value="30"> Years
+            </div>
+            <div>
+                Lifestyle: <input type="number" min="1" max="5" id="lifestyle" value="1"> 1 = low activity, 5 = high activity
+            </div>
+        </form>
+    
+        <script>
+            const strValue = 'This is a string';
+            msg = document.getElementById('msg');
+            let html = '';
+            let calForm = document.forms.calForm.addEventListener('change', outputCalories);
+            
+            function outputCalories() {
+                let gender = getFieldValue('female') === true? 'Female' : 'Male';
+                let weight = getFieldValue('weight')
+                let heightInInches = Number(getFieldValue('heightFeet')) * 12 + Number(getFieldValue('heightInches'))
+                let age = getFieldValue('age')
+                let lifestyle = getFieldValue('lifestyle')
+                let bmr = lifestyle * (66 + (6.2 * Number(weight)) + (12.7 * heightInInches) - (6.76 * Number(age)));
+                msg.innerHTML = 'BMR is ' + Math.round(bmr);
+            }
+            
+            getFieldValue = (fieldId) => {
+                let element = document.getElementById(fieldId);
+                if(element.value === 'on'){
+                    return element.checked;
+                }
+                return element.value
+            }
+            
+            //promises
+            // function getDataPromise(url){
+            //     return new Promise(function(response) {
+            //         console.log('ajax called');
+            //         let xHR = new XMLHttpRequest;
+            //         //xHR.addEventListener("load", postQuestions);
+            //         xHR.onload = function () {
+            //             if (xHR.status == 200) {
+            //                 response(xHR.response);
+            //             }
+            //         }
+            //         xHR.open('GET', url, true);
+            //         xHR.send();
+            //     });
+            // }
+            //
+            // getDataPromise('http://discoveryvip.com/shared/json.php?f=quiz').then((response) => {
+            //     console.log('then called');
+            //     console.log(response)
+            // });
+
+            //using a class
+            // class MakeName {
+            //     constructor(firstName, lastName) {
+            //         this.firstName = firstName;
+            //         this.lastName = lastName;
+            //         this.fullName = firstName + ' ' + lastName;
+            //     }
+            //
+            //     completeName(){
+            //         console.log('fullName called');
+            //         this.fullName = this.firstName + ' ' + this.lastName;
+            //         console.log(this.fullName);
+            //     }
+            // }
+            //
+            // let friend = new MakeName('Ed', 'W');
+            // console.log(friend.fullName);
+            // friend.completeName();
+           
+            
+            // let person = {
+            //     firstname: 'Ed',
+            //     lastName: 'W',
+            // }
+
+            // window.addEventListener('load', (event) => {
+            //     init();
+            // });
+            //
+            // init = () => {
+            //     loadJSON();
+            // }
+            //
+            // loadJSON = () => {
+            //     let xHR = new XMLHttpRequest;
+            //     xHR.addEventListener("load", postQuestions);
+            //     xHR.open('GET', 'http://discoveryvip.com/shared/json.php?f=quiz', true);
+            //     xHR.send();
+            // }
+            //
+            // function postQuestions() {
+            //     console.log(this.responseText);
+            //     let questions = JSON.parse(this.responseText);
+            //     for(let i = 0; i < questions.length; i++){
+            //         html += '<h3>Question ' + (i + 1) + '</h3>'
+            //         html += '<p>' + questions[i].question + '?</p>'
+            //         let correct = questions[i].correct
+            //         for(let j = 0; j < questions[i].answers.length; j++) {
+            //             let isCorrect = j == correct;
+            //             html += '<div id="div' + i + j + '" data-id="' + isCorrect + '" onclick="checkAnswer(div' + i.toString() + j.toString() + ')">' + questions[i].answers[j] + '</div>';
+            //
+            //         }
+            //     }
+            //     msg.innerHTML = html;
+            //     //console.log(questions);
+            //
+            // }
+            
+            // const name = 'Ed'
+            //
+            // msg.innerHTML = `${name} is the name`;
+        
+        </script>
+    
+    </body>
+</html>

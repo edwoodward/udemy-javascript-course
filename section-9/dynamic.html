@@ -1,0 +1,510 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dynamic</title>
+    <style>
+        .holder {
+            display: inline-block;
+            width: 300px;
+            height: 300px;
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        .active {
+            background-color: #60A6C1;
+        }
+
+
+        #overlay {
+            visibility: hidden;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 400px;
+            height: 200px;
+            background-color: #ddd;
+            border: 1px solid black;
+            z-index: 1000;
+        }
+
+        .box {
+            background-color: aqua;
+            font-size: 1.5em;
+            color: #fff;
+        }
+        .box2 {
+            background-color: red;
+            font-size: 0.5em;
+            color: #ddd;
+        }
+        #one, #two, #three {
+            width:100px;
+            height: 100px;
+            display: inline-block;
+            border: 1px solid black;
+        }
+        .acc {
+            font-size: 1.5em;
+            background-color: #ddd;
+            width:600px;
+        }
+
+        .con {
+            border: 1px solid black;
+            padding: 20px;
+            font-size: 0.8em;
+            display: none;
+            width:560px;
+        }
+        .active {
+            display: block;
+        }
+
+    </style>
+</head>
+    <body>
+        <h3>Dynamic Table</h3>
+        <div>
+            <input type='text' id='np' name="newPerson">
+            <input type='button' id="btn2" onclick="addPerson()" value="Add Person">
+        </div>
+        <div>
+            <input type='button' id="btn1" onclick="buildTable()" value="Build Table">
+        </div>
+        <span id="filler"></span>
+        <br/>
+        <h3>Select Text</h3>
+        <div id='message'></div>
+        <input type='text' id='textItem' value="This is some text to select">
+        <br/>
+        <h3>Mouse Games</h3>
+        <div class="holder">
+            <div id="box">
+
+            </div>
+        </div>
+        <br/>
+        <div id='msg2'>Move the cursor over the image</div>
+        <div><img id='img' src="http://via.placeholder.com/350x150/ff0000/fff?text=image1" alt=""></div>
+
+
+        <!--<h3>Shopping List</h3>
+        <input type='text' id='newItem' name="newitem">
+        <input type='button' id="btn2" onclick="addItem()" value="Add Item">
+        <ul id='list'>
+
+        </ul>-->
+        <!--<div id='message'>Click the table</div>
+        <div>
+            <input type='button' id="btn1" onclick="buildTable()" value="Build Table">
+        </div>
+        <div>
+            <input type='text' id='np' name="newPerson">
+            <input type='button' id="btn2" onclick="addPerson()" value="Add Person">
+        </div>-->
+
+
+        <br/>
+        <h3>Toggle Sections</h3>
+        <p>Click a Title</p>
+        <div class="acc">This is Javascript racing</div>
+        <div class="con">Fun with Javascript<img src="http://via.placeholder.com/350x150?text=image1" alt=""></div>
+        <div class="acc">Second heading</div>
+        <div class="con">More Fun with Javascript<img src="http://via.placeholder.com/150x150?text=image2" alt=""></div>
+
+        <!--<div>
+            <div id="one">
+                Box One
+            </div>
+            <div id="two">
+                Box Two
+            </div>
+            <div id="three">
+                Box Three
+            </div>
+        </div>-->
+
+        <!--<div id='message'></div>
+        <div id='message2'></div>
+        <input type='url' id='url' name="url">
+
+        <div class="output highlight">
+            Test Me 1
+        </div>
+        <div class="output highlight">
+            Test Me 2
+        </div>
+        <div class="output highlight">
+            Test Me 3
+        </div>
+        <div class="output highlight">
+            Test Me 4
+        </div>
+        <div class="output highlight">
+            Test Me 5
+        </div>
+        <input type="button" id="btn1" value="Toggle Modal">-->
+
+        <!--<div id="overlay">
+            <div>
+                <p id="textgoeshere">This is a modal displayed over the main window. Not really</p>
+            </div>
+        </div>-->
+
+        <!--<form name="urlForm">
+            <input type='url' id='url' name="url">
+            <input type='text' id='fn' name="'first">
+            <input type='text' id='ln' name="last">
+            <textarea name="output"></textarea>
+            <div id="another">Parent
+                <div id='one'>Test 1</div>
+                <div id='two'>Test 2</div>
+                <div id='three'>Test 3</div>
+                <div id='four'>Test 4</div>
+                <div id='five'>Test 5</div>
+            </div>
+            <input id="btn1" onclick="" value="ClickHere">
+        </form>-->
+
+
+        <script src="dynamic.js">
+            // var output = document.getElementById('message');
+            // var names = ['Ed', 'Mary', 'Bob', 'Cindy', 'Jessica', 'Scott']
+            // var colors = ['red', 'blue', 'yellow', 'green', 'purple', 'orange'];
+            // var clickCount = 1;
+            //
+            // function buildTable(){
+            //     let table = document.createElement('table');
+            //     table.border = 1;
+            //     table.setAttribute('id', 'table1');
+            //     for (let row = 0; row < names.length; row++) {
+            //         let newrow = table.insertRow();
+            //         for (var col = 0; col < 3; col++) {
+            //             if(col == 0) {
+            //                 let cell = newrow.insertCell();
+            //                 cell.textContent = names[row];
+            //                 cell.setAttribute('data-row', row);
+            //                 cell.addEventListener('click',function(){
+            //                     updateCount(this);
+            //                 });
+            //             }
+            //             else if(col == 1){
+            //                 let indexCell = newrow.insertCell();
+            //                 indexCell.setAttribute('data-row', row);
+            //                 indexCell.setAttribute('data-action', 'delete');
+            //                 var link = document.createElement("a");
+            //                 link.setAttribute("href", "udemy-javascript-course:deleteName(" + row + ");")
+            //                 var linkText = document.createTextNode("Delete");
+            //                 link.appendChild(linkText);
+            //                 indexCell.appendChild(link);
+            //             }
+            //             else {
+            //                 let emptyCell = newrow.insertCell();
+            //                 emptyCell.setAttribute('data-row', row);
+            //                 emptyCell.setAttribute('data-action', 'edit');
+            //                 var link2 = document.createElement("a");
+            //                 link2.setAttribute("href", "udemy-javascript-course:editName(" + row + ");")
+            //                 var linkText2 = document.createTextNode("Edit");
+            //                 link2.appendChild(linkText2);
+            //                 emptyCell.appendChild(link2);
+            //             }
+            //         }
+            //     }
+            //     document.body.appendChild(table);
+            //
+            // }
+            //
+            // function deleteName(t){
+            //     //let rowNum = t.closest('[data-row]').getAttribute('data-row');
+            //     names.splice(t, 1);
+            //     let tab = document.getElementById('table1');
+            //     tab.remove();
+            //     buildTable();
+            // }
+            //
+            // function addPerson(){
+            //     let table = document.getElementById('table1');
+            //     let person = document.getElementById('np');
+            //     let tableSize = table.rows.length;
+            //     names.push(person.value);
+            //     let row = table.rows[1].cloneNode(true);
+            //     row.cells[0].innerHTML = person.value;
+            //     let link1 = document.createElement("a");
+            //     link1.setAttribute("href", "udemy-javascript-course:deleteName(" + tableSize + ");");
+            //     let linkText1 = document.createTextNode("Delete");
+            //     link1.appendChild(linkText1);
+            //     row.cells[1].innerHTML = '';
+            //     row.cells[1].appendChild(link1);
+            //     let link2 = document.createElement("a");
+            //     link2.setAttribute("href", "udemy-javascript-course:editName(" + tableSize + ");");
+            //     let linkText2 = document.createTextNode("Edit");
+            //     link2.appendChild(linkText2);
+            //     row.cells[2].innerHTML = '';
+            //     row.cells[2].appendChild(link2);
+            //     table.appendChild(row);
+            //
+            // }
+            //
+            // function editName(t){
+            //     let table = document.getElementById('table1');
+            //
+            //     let tablerow = table.rows[parseInt(t)];
+            //     tablerow.style.backgroundColor = 'yellow';
+            //     let name = tablerow.cells[0].innerHTML;
+            //     let editedName = prompt('Please edit the name', name);
+            //     if (editedName == null || editedName === "") {
+            //         tablerow.cells[0].innerHTML = name;
+            //     }
+            //     else {
+            //         tablerow.cells[0].innerHTML = editedName;
+            //         names[parseInt(t)] = editedName;
+            //     }
+            //
+            // }
+
+
+            // var textItem = document.getElementById('textItem');
+            // var msg = document.getElementById('message');
+            //
+            // textItem.addEventListener('select', function(){
+            //     let start = this.selectionStart;
+            //     let end = this.selectionEnd;
+            //     let str = this.value;
+            //     console.log('start: ' + start + ' end: ' + end + ' str: ' + str);
+            //     msg.innerHTML = 'The selected text is: ' + str.substring(start,end);
+            // });
+
+            // textItem.addEventListener('mouseout', function(){
+            //     msg.innerHTML = '';
+            // })
+
+            // var hdr = document.querySelector('.holder');
+            // var output = document.getElementById('output');
+            //
+            // hdr.addEventListener('mousemove', function(e){
+            //     output.innerHTML = e.clientX + ' ' + e.clientY;
+            // })
+            //
+            // hdr.addEventListener('mouseover', function(){
+            //     this.classList.toggle('active')
+            // })
+
+
+            // var img = document.getElementById('img');
+            // var msg = document.getElementById('message');
+            //
+            // img.addEventListener('mouseover', function(){
+            //     msg.innerHTML = 'over';
+            //     this.src = 'http://via.placeholder.com/350x150/0000FF/fff?text=image2'
+            // })
+            //
+            // img.addEventListener('mouseout', function(){
+            //     msg.innerHTML = 'out';
+            //     this.src = 'http://via.placeholder.com/350x150/ff0000/fff?text=image1'
+            // })
+
+
+            // let list = document.getElementById('list');
+            //
+            // function addItem() {
+            //     let newItem = document.getElementById('newItem');
+            //     let newLI = document.createElement('li');
+            //     newLI.innerHTML = newItem.value;
+            //     //newLI.append(document.createTextNode(newItem.value));
+            //     list.appendChild(newLI);
+            //     newItem.value = '';
+            // }
+
+
+            // var output = document.getElementById('message');
+            // var names = ['Ed', 'Mary', 'Bob', 'Cindy', 'Jessica', 'Scott']
+            // var colors = ['red', 'blue', 'yellow', 'green', 'purple', 'orange'];
+            // var clickCount = 1;
+            //
+            // function buildTable(){
+            //     let table = document.createElement('table');
+            //     table.border = 1;
+            //     table.setAttribute('id', 'table1');
+            //     for (let row = 0; row < 6; row++) {
+            //         let newrow = table.insertRow();
+            //         for (var col = 0; col < 3; col++) {
+            //             if(col == 0) {
+            //                 let cell = newrow.insertCell();
+            //                 cell.textContent = names[row];
+            //                 cell.style.color = colors[row];
+            //                 cell.setAttribute('data-row', row);
+            //                 cell.addEventListener('click',function(){
+            //                     updateCount(this);
+            //                 });
+            //             }
+            //             else if(col == 1){
+            //                 let indexCell = newrow.insertCell();
+            //                 indexCell.setAttribute('data-row', row);
+            //                 indexCell.setAttribute('data-vote', 0);
+            //                 indexCell.textContent = row + 1;
+            //             }
+            //             else {
+            //                 let emptyCell = newrow.insertCell();
+            //                 emptyCell.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+            //                 emptyCell.setAttribute('data-row', row);
+            //                 emptyCell.setAttribute('data-vote', 0);
+            //             }
+            //         }
+            //     }
+            //     document.body.appendChild(table);
+            //
+            // }
+            //
+            // function toggleModal(t){
+            //     let modal = document.getElementById('overlay');
+            //     if(modal.style.visibility==='visible'){
+            //         modal.style.visibility='hidden';
+            //     }
+            //     else {
+            //         modal.style.visibility='visible';
+            //         let para = modal.querySelector('#textgoeshere');
+            //         para.innerHTML = t.tagName + ' draggable: ' + t.draggable;
+            //     }
+            //
+            // }
+            //
+            // function updateCount(t){
+            //     let element = t.closest('[data-row').getAttribute('data-row');
+            //     output.innerHTML = 'Ed is on row ' + element + 1;
+            //     t.parentElement.lastElementChild.innerHTML = clickCount;
+            //     clickCount++;
+            //
+            // }
+            //
+            // function addPerson(){
+            //     let table = document.getElementById('table1');
+            //     let person = document.getElementById('np');
+            //     let row = table.rows[1].cloneNode(true);
+            //     row.cells[0].innerHTML = person.value;
+            //     row.cells[0].addEventListener('click',function(){
+            //         updateCount(this);
+            //     });
+            //     row.cells[1].innerHTML = table.rows.length + 1;
+            //     row.cells[2].innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+            //     table.appendChild(row);
+            //
+            //
+            //
+            // }
+
+
+
+
+
+
+            // let titles = document.querySelectorAll('.acc');
+            // for(var i = 0; i < titles.length; i++){
+            //     titles[i].onclick = function() {
+            //         this.nextElementSibling.classList.toggle('active');
+            //         for(let x = 0; x < titles.length; x++) {
+            //             if(titles[x] !== this) {
+            //                 let item = titles[x];
+            //                 item.nextElementSibling.classList.remove('active');
+            //             }
+            //         }
+            //     }
+            // }
+
+            //change class based on object clicked
+            // var divList = document.getElementsByTagName('div');
+            // for(var i = 1; i < divList.length; i++) {
+            //     divList[i].onclick=function(){
+            //         this.classList.add('active');
+            //         for(var x = 1; x < divList.length; x++) {
+            //
+            //             if( divList[x] !== this) {
+            //                 let item = divList[x];
+            //                 item.classList.remove('active');
+            //             }
+            //         }
+            //     }
+            // }
+
+            //more styling
+            // var btn = document.getElementById('btn1');
+            // btn.onclick = function(){
+            //     let modal = document.getElementById('overlay');
+            //     if(modal.style.visibility==='visible'){
+            //         modal.style.visibility='hidden';
+            //     }
+            //     else {
+            //         modal.style.visibility='visible';
+            //     }
+            //
+            // }
+
+
+            //styling in udemy-javascript-course
+            // var elements = document.querySelectorAll('.output')
+            // var colors = ['red', 'blue', 'yellow', 'green', 'purple'];
+            // window.setTimeout(changeColors, 3000);
+            // function changeColors() {
+            //     for(var x = 0; x < elements.length; x++) {
+            //         elements[x].style.backgroundColor = colors[Math.floor(Math.random() * Math.floor(5))];
+            //     }
+            //     window.setTimeout(changeColors, 3000);
+            // }
+
+            // var element =  document.querySelector('input[name="url"]');
+            // element.value='Test input';
+            // var element2 =  document.querySelector('.output');
+            // element2.innerHTML = 'More test input';
+            // var element3 =  document.querySelector('#message');
+            // element3.innerHTML = 'Message input';
+
+            // var classList = document.getElementsByClassName('output');
+            // var highlights = document.getElementsByClassName('highlight');
+            // var msg = document.getElementById('message');
+            // var msg2 = document.getElementById('message2');
+            // var colors = ['red', 'blue', 'yellow', 'green', 'purple'];
+            //
+            // for(var x = 0; x<classList.length; x++) {
+            //     //let item = classList[x];
+            //     classList[x].onclick = function(){
+            //         msg.innerHTML = 'Item clicked: ' + item.innerHTML;
+            //     }
+            //
+            // }
+            //
+            // for(var i = 0; i<highlights.length; i++) {
+            //     //let item = highlights[i];
+            //     highlights[i].onclick = function(){
+            //         msg2.style.backgroundColor=colors[i];
+            //         msg2.innerHTML = 'Change color'
+            //     }
+            //
+            // }
+
+
+            // var taList = document.getElementsByTagName('textarea');
+            //
+            // (function(){
+            //     let output = taList.output;
+            //     let divList = document.getElementById('another');
+            //     let html = '';
+            //     for(var x in divList.children) {
+            //         console.log(divList.children[x].outerHTML);
+            //         if(divList.children[x].outerHTML !== undefined) {
+            //             html += divList.children[x].innerHTML + ' ';
+            //         }
+            //
+            //     }
+            //     output.innerHTML = html;
+            // })();
+
+        </script>
+
+    </body>
+</html>

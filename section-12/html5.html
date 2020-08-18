@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>HTML 5</title>
+        <style>
+            .item{
+                border: 1px solid black;
+                padding: 2%;
+                width: 29%;
+                float: left;
+                height: 300px;
+            }
+            
+            .img-fluid{
+                max-width: 100%;
+            }
+            
+            .productItem, .btn{
+                border:1px solid black;
+                text-decoration: none;
+                background-color: green;
+                color: azure;
+                border-radius: 10px;
+                padding: 3px;
+                font-size: 0.6em;
+                display: inline-block;
+            }
+            
+            .remove {
+                background-color: red;
+            }
+            
+            #data{
+                border:1px solid black;
+                text-align: center;
+            }
+            
+            canvas{
+                border:1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+<!--        <div id="cart"></div>-->
+        <input type="color" id="color">
+        <input type="button" id="save" value = 'Save'>
+        <input type="button" id="clear" value="Clear">
+        <div id="msg"></div>
+<!--        <input type="file" multiple onchange="uploadFiles(this.files)">-->
+<!--        <input type="file" id="imgLoader">-->
+        
+        <canvas id="canvas1"></canvas>
+        <!--<canvas id="canvas2"></canvas>
+        <canvas id="canvas3"></canvas>-->
+        
+        <script>
+            //save image from canvas and clear canvas
+            let msg = document.getElementById('msg');
+            let canvas1 = document.getElementById('canvas1');
+            let color = document.getElementById('color');
+            let colorValue = 'blue';
+            let save = document.getElementById('save');
+            save.addEventListener('click', function(){
+                let downloadLink = document.createElement('a');
+                downloadLink.setAttribute('download', 'CanvasAsImage.png');
+                //let canvas = document.getElementById('myCanvas');
+                canvas1.toBlob(function(blob) {
+                    let url = URL.createObjectURL(blob);
+                    downloadLink.setAttribute('href', url);
+                    downloadLink.click();
+                });
+            })
+            let clear = document.getElementById('clear');
+            clear.addEventListener('click', function(){
+                ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+            })
+            
+            canvas1.width = 500;
+            canvas1.height = 500;
+            let ctx1 = canvas1.getContext('2d');
+            let pos = {x:0, y:0};
+            window.addEventListener('load', (event) => {
+                init();
+            });
+            
+            function init() {
+                canvas1.addEventListener('mousemove',draw);
+                canvas1.addEventListener('mousemove',setPosition);
+                canvas1.addEventListener('mouseenter',setPosition);
+                color.addEventListener('change', setColor);
+            }
+            
+            function setColor(e) {
+                //console.dir(e.target);
+                colorValue = e.target.value;
+            }
+            
+            function draw(e) {
+                if(e.buttons !==1) return;
+                //msg.innerHTML = 'x = ' + pos.x + ' y = ' + pos.y;
+                ctx1.beginPath();
+                ctx1.moveTo(pos.x, pos.y);
+                setPosition(e);
+                ctx1.lineTo(pos.x, pos.y);
+                ctx1.strokeStyle = colorValue;
+                ctx1.stroke();
+            
+            }
+            
+            function setPosition(e) {
+                //console.log(e);
+                pos.x = e.pageX;
+                pos.y = e.pageY;
+                //msg.innerHTML = 'x = ' + pos.x + ' y = ' + pos.y;
+            }
+            
+            //load image into canvas
+            // let imgLoader = document.getElementById('imgLoader');
+            // imgLoader.addEventListener('change',uploadImage, false);
+            //
+            // function uploadImage() {
+            //     let fr = new FileReader();
+            //     fr.readAsDataURL(event.target.files[0]);
+            //     fr.onload = function(e){
+            //         let image = new Image();
+            //         image.src = event.target.result;
+            //         image.onload = function(){
+            //             canvas1.width = image.width;
+            //             canvas1.height = image.height;
+            //             ctx1.drawImage(image,0,0);
+            //             ctx1.fillText("Javascript Course", 50, 50);
+            //         }
+            //         //console.log(fr);
+            //     }
+            // }
+            
+            
+            //drawing circles that move across the screen
+            // let pos = {x:0, y:50};
+            // let pos2 = {x:50, y:100};
+            // window.addEventListener('load', (event) => {
+            //     draw();
+            // });
+            //
+            //
+            // function draw() {
+            //     pos.x = pos.x + 5;
+            //     pos2.y = pos2.y + 5;
+            //     if(pos.x > canvas1.width){
+            //         pos.x = 0;
+            //     }
+            //     if(pos.y > canvas1.height){
+            //         pos.y = 50;
+            //     }
+            //     if(pos2.x > canvas1.width){
+            //         pos2.x = 50;
+            //     }
+            //     if(pos2.y > canvas1.height){
+            //         pos2.y = 100;
+            //     }
+            //     ctx1.clearRect(0,0,canvas1.width, canvas1.height);
+            //     ctx1.beginPath();
+            //     ctx1.arc(pos.x, pos.y, 50, 0, 2 * Math.PI);
+            //     ctx1.fillStyle = "red";
+            //     ctx1.fill();
+            //
+            //     ctx1.beginPath();
+            //     ctx1.arc(pos2.x, pos2.y, 50, 0, 2 * Math.PI);
+            //     ctx1.fillStyle = "blue";
+            //     ctx1.fill();
+                
+                //window.setTimeout(draw, 500);
+            //}
+            
+            //multiple canvas objects
+            // ctx1.fillStyle = "green";
+            // ctx1.fillRect(5,5,150,100);
+            //
+            // let canvas2 = document.getElementById('canvas2');
+            // let ctx2 = canvas2.getContext('2d');
+            // ctx2.beginPath();
+            // ctx2.arc(200, 75, 50, 0, 2 * Math.PI);
+            // ctx2.stroke();
+            // ctx2.fillStyle = "red";
+            // ctx2.fill();
+            //
+            // let canvas3 = document.getElementById('canvas3');
+            // let ctx3 = canvas3.getContext('2d');
+            // ctx3.drawImage(canvas1,10,10);
+            // ctx3.drawImage(canvas2,10,10);
+            
+            //using Canvas
+            // let canvas = document.getElementById('canvas1');
+            // let ctx = canvas.getContext('2d');
+            // ctx.fillRect(10,30,100,100);
+            // //circle
+            // ctx.beginPath();
+            // ctx.arc(200, 75, 50, 0, 2 * Math.PI);
+            // ctx.stroke();
+            // ctx.fillStyle = "red";
+            // ctx.fill();
+            // //triangle
+            // ctx.beginPath();
+            // ctx.moveTo(200, 150);
+            // ctx.lineTo(275, 275);
+            // ctx.lineTo(275, 125);
+            // ctx.fillStyle = "green";
+            // ctx.fill();
+            // ctx.lineWidth = 10;
+            // ctx.strokeStyle = 'purple';
+            // ctx.strokeRect(10, 200,100,100);
+            // //move to a position
+            // ctx.moveTo(50,300);
+            // //draw a line
+            // ctx.lineTo(100,450);
+            // ctx.stroke();
+            // //circle with a line through it
+            // ctx.beginPath();
+            // ctx.arc(200, 300, 50, 0, 2 * Math.PI);
+            // ctx.stroke();
+            // ctx.lineTo(150,300);
+            // ctx.stroke();
+            
+            //shopping cart
+            // let sCart = document.getElementById('cart');
+            // let shoppingCart = [];
+            // let grandTotal = 0;
+            // if(localStorage.getItem('shoppingCart')){
+            //     let items = localStorage.getItem('shoppingCart');
+            //     let itemsArray = JSON.parse(items);
+            //     itemsArray.forEach(function(item){
+            //         shoppingCart.push(item);
+            //     })
+            // }
+            //
+            //
+            //
+            // //shopping cart
+            // var items = [{
+            //     name: 'iPhone'
+            //     , details: 'White'
+            //     , cost: 500
+            // }, {
+            //     name: 'iPad'
+            //     , details: 'White'
+            //     , cost: 800
+            // }, {
+            //     name: 'Cable'
+            //     , details: '3 foot'
+            //     , cost: 10
+            // }, {
+            //     name: 'Camera'
+            //     , details: '25MP'
+            //     , cost: 300
+            // }, {
+            //     name: 'Laptop'
+            //     , details: 'Intel i7'
+            //     , cost: 1200
+            // }, {
+            //     name: 'LCD Monitor'
+            //     , details: '24 inch'
+            //     , cost: 200
+            // }, {
+            //     name: 'TV'
+            //     , details: '50 inch'
+            //     , cost: 450
+            // }];
+            // var html = '<br>';
+            //
+            // window.onload = init;
+            //
+            // function init() {
+            //     buildList();
+            //     let items = document.querySelectorAll('.productItem');
+            //     for(let i = 0; i < items.length; i++) {
+            //         items[i].addEventListener('click', function(e){
+            //             e.preventDefault();
+            //             addToCart();
+            //         })
+            //     }
+            // }
+            //
+            // function addToCart() {
+            //     //console.log(event.target.dataset);
+            //     item = event.target.dataset;
+            //     item.qty = 1;
+            //     let inCart = false;
+            //     for(let i = 0; i < shoppingCart.length; i++){
+            //         if(shoppingCart[i].id == item.id){
+            //             shoppingCart[i].qty = parseInt(shoppingCart[i].qty) + 1;
+            //             inCart = true;
+            //         }
+            //     }
+            //     if(!inCart){
+            //         shoppingCart.push(item);
+            //     }
+            //
+            //     localStorage.setItem('shoppingCart',JSON.stringify(shoppingCart));
+            //     outputCart();
+            //
+            // }
+            //
+            // function outputCart() {
+            //     grandTotal = 0;
+            //     let cart = localStorage.getItem('shoppingCart');
+            //     cartObj = JSON.parse(cart);
+            //     let html = 'Shopping Cart: <br/><table><tr><td id="data">Name</td><td id="data">Price</td><td id="data">Quantity</td><td id="data">Total</td><td id="data">Options</td>'
+            //     cartObj.forEach(function(item){
+            //         let total = getTotal(item.price, item.qty);
+            //         html += '<tr><td id="data">' + item.name + '</td><td id="data">' + item.price + '</td><td id="data">' + item.qty + '</td><td id="data">' + total + '</td><td id="data"><span id="data" class="remove btn" onclick="remove(' + item.id + ')">X</span></td></tr></tr>';
+            //     })
+            //     html += '</table><br/><span id="data">Total: $' + grandTotal + '</span>';
+            //     sCart.innerHTML = html;
+            // }
+            //
+            // function getTotal(price, quantity){
+            //     let total = parseInt(price) * parseInt(quantity);
+            //     grandTotal = grandTotal + total;
+            //     return '$' + total;
+            // }
+            //
+            // function remove(index){
+            //     console.log('remove called');
+            //     for(let i = 0; i < shoppingCart.length; i++){
+            //         if(shoppingCart[i].id == index){
+            //             console.log('removing item');
+            //             shoppingCart.splice(i,1);
+            //             localStorage.setItem('shoppingCart',JSON.stringify(shoppingCart));
+            //             outputCart();
+            //
+            //         }
+            //     }
+            // }
+            //
+            // function buildList() {
+            //     let x = 0;
+            //     items.forEach(function (v) {
+            //         html += '<div class="item"><h3>' + v.name + '</h3><img src="http://placehold.it/350x150" class="img-fluid"><div>' + v.details + ' $' + v.cost  + ' <a href="#" class="productItem" data-name="' + v.name + '" data-s="' + v.details + '"  data-price="' + v.cost + '" data-id="' + x + '" >Add to Cart</a></div></div>';
+            //         x++;
+            //     })
+            //     msg.innerHTML += html;
+            // }
+            
+            
+            //JSON Stringify
+            // let jsonObj = {'msg':'This is a message','count': 1};
+            // let jsonStr = JSON.stringify(jsonObj);
+            // console.dir(jsonStr);
+            // let jsonObj2 = JSON.parse(jsonStr);
+            // console.dir(jsonObj2);
+            // localStorage.setItem('jsonExample', jsonStr);
+            
+            
+            //local storage
+            // let message = 'Hello World';
+            // localStorage.setItem('msg', message);
+            // if(!localStorage.getItem('count')) {
+            //     localStorage.setItem('count', '1');
+            // }
+            //
+            //
+            //
+            // if(localStorage.getItem('msg')){
+            //     let count = localStorage.getItem('count');
+            //     console.log((parseInt(count) + 1).toString());
+            //     msg.innerHTML = localStorage.getItem('msg') + ' ' + count;
+            //     localStorage.setItem('count', (parseInt(count) + 1).toString());
+            // }
+            
+            //location
+            // window.onload = init;
+            //
+            // function init() {
+            //     navigator.geolocation.getCurrentPosition(displayLocation);
+            // }
+            //
+            // function displayLocation(data){
+            //     console.dir(data);
+            // }
+            
+            //file upload
+            // let msg = document.getElementById('msg');
+            // function uploadFiles(files) {
+            //     for(let i = 0; i < files.length; i++){
+            //         msg.innerHTML += files[i].name + ' ' + files[i].size + '<br/>';
+            //     }
+            // }
+        
+        </script>
+    
+    </body>
+</html>

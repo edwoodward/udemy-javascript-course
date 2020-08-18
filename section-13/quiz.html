@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Quiz</title>
+    </head>
+    <body>
+        <div id="answer"></div>
+        <div id="msg"></div>
+        
+        <script>
+            let msg = document.getElementById('msg');
+            let answer = document.getElementById('answer');
+            let html = '';
+
+            window.addEventListener('load', (event) => {
+                init();
+            });
+
+            function init() {
+                loadJSON();
+            }
+
+            function loadJSON(){
+                let xHR = new XMLHttpRequest;
+                xHR.addEventListener("load", postQuestions);
+                xHR.open('GET', 'http://discoveryvip.com/shared/json.php?f=quiz', true);
+                xHR.send();
+            }
+
+            function postQuestions(){
+                let questions = JSON.parse(this.responseText);
+                for(let i = 0; i < questions.length; i++){
+                    html += '<h3>Question ' + (i + 1) + '</h3>'
+                    html += '<p>' + questions[i].question + '?</p>'
+                    let correct = questions[i].correct
+                    for(let j = 0; j < questions[i].answers.length; j++) {
+                        let isCorrect = j == correct;
+                        html += '<div id="div' + i + j + '" data-id="' + isCorrect + '" onclick="checkAnswer(div' + i.toString() + j.toString() + ')">' + questions[i].answers[j] + '</div>';
+                        
+                    }
+                }
+                msg.innerHTML = html;
+                console.log(questions);
+
+            }
+            
+            function checkAnswer(divNum) {
+                if(divNum.dataset.id === 'true'){
+                    answer.innerHTML = 'Your answer is correct!';
+                    divNum.style.width = "100px";
+                    divNum.style.background = 'green';
+                }
+                else {
+                    answer.innerHTML = 'Your answer is incorrect. Please try again.';
+                    divNum.style.width = "100px";
+                    divNum.style.background = 'red';
+                }
+            }
+
+            // function loadJSON(callback, url) {
+            //     let xHR = new XMLHttpRequest;
+            //     xHR.onreadystatechange = function () {
+            //         if (this.readyState == 4 && this.status == 200) {
+            //             callback(this.responseText);
+            //         }
+            //         else {
+            //             return false;
+            //         }
+            //     }
+            //     xHR.open('GET', url, true);
+            //     xHR.send();
+            //     //console.log(xHR);
+            // }
+            
+            
+        
+        </script>
+    
+    </body>
+</html>

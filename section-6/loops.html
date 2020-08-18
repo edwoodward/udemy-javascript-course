@@ -1,0 +1,125 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loops</title>
+  <style>
+    td{
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <button id="table-btn" type="button">Build table</button>
+  <div id='output'></div>
+  <br/>
+  <button id="car-btn" type="button">Car Details</button>
+  <div id='car'></div>
+  <br/>
+  <button id="array-btn" type="button">Loop through an array</button>
+  <div id='array'></div>
+  <br/>
+  <button id="banana-btn" type="button">Eat some bananas</button>
+  <div id='banana'></div>
+  
+  <script src="loops.js">
+        //build table with cell numbers
+        // var output = document.getElementById("output");
+        // var html = "<table>";
+        // for (var row = 0; row < 5; row++) {
+        //     html += "<tr>";
+        //     for (var col = 0; col < 3; col++) {
+        //         html += "<td>Cell = " + ((col + 1) + (row * 3)) + "</td>";
+        //     }
+        //     html += "</tr>";
+        // }
+        // html += "</table>";
+        // output.innerHTML = html;
+    
+
+    // var output = document.getElementById("output");
+
+    // for(var x in document) {
+    //    output.innerHTML += x + ' = ' + document[x] + '<br/>';
+    // }
+
+    //loop through object
+    // var car = {numOfWheels: 4, color: 'blue', hatchback: true, interiorColor: 'red'};
+
+    // for(var x in car) {
+    //   output.innerHTML += x + ' = ' + car[x] + '<br/>';
+    // }
+    
+    //for loop with Array
+    // var sum = 0;
+    // var userNames = ['Ed', 'Tony','Carol', 'Jessica', 'Stan', 'Jan', 'Hope', 'Fred'];
+
+    // for(var i = userNames.length; i > 0; i--) {
+    //   output.innerHTML += userNames[i-1] + '<br/>';
+    // }
+    
+    
+    //Using continue
+    // for( var i = 0; i < 1000; i++) {
+    //   if(i % 5 == 0) {
+    //     sum += i;
+    //     output.innerHTML += 'numbers being added together are ' + sum + " + " + i + '<br/>';
+    //   }
+    //   else {
+    //     continue;
+    //   }
+    // }
+    // output.innerHTML += "The total is " + sum;
+    
+    // More for loop
+    // var html = '<table>';
+    // var cell = 1;
+
+    // for(var row = 0; row < 10; row++) {
+    //   html += '<tr>'
+    //   for(var col = 0; col < 5; col ++) {
+    //     html += '<td>Cell=' + cell + '</td>';
+    //     cell++;
+    //   } 
+    //   html += '</tr>';
+    // }
+    // html += '</table>';
+    // output.innerHTML = html;
+
+    //for loop
+    //var reply = prompt('How many bananas will you eat?');
+    // var calories = 0;
+    // for(var x = 0; x < Number(reply); x++) {
+    //   calories += 89;
+    // }
+    // output.innerHTML = "Eating " + reply + ' bananas, you consumed ' + calories + ' calories'; 
+
+    //while loop
+    //var x = 'secret';
+    // while(x !== reply) {
+    //   var reply = prompt('Not correct. Guess again');
+    // }
+    // output.innerHTML = "You guessed correctly! The password is " + x;
+
+    //do loop
+    // do {
+    //   if(x % 2 == 0) {
+    //     output.innerHTML += 'loop ' + x + '<br/>';
+    //   }
+      
+    //   x++;
+    // }
+    // while(x < Number(reply));
+
+    // var x = 0;
+    // do {
+    //   output.innerHTML += 'The value of x is ' + x + '<br/>';
+    //   x++;
+    // }
+    // while(x < 10);
+    // output.innerHTML += 'The final value of x is ' + x + '<br/>';
+
+  </script>
+  
+</body>
+</html>

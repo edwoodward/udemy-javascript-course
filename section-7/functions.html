@@ -1,0 +1,229 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Functions</title>
+</head>
+<body>
+  <h3>Shopping List</h3>
+  <div>
+    Add item to list: <input type='text' id='item'>
+    <button id="listBtn">Add item to list</button>
+  </div>
+  <div>
+    <div id='output'></div>
+  </div>
+  <br/>
+  <h3>Remove duplicates</h3>
+  <div>
+    <button id="dupBtn">Remove Duplicates</button>
+  </div>
+  <div>
+    <div id='dups'></div>
+  </div>
+  <br/>
+  <h3>Shuffle Names</h3>
+  <div>
+    <button id="shuffleBtn">Shuffle Names</button>
+  </div>
+  <div>
+    <div id='names'></div>
+  </div>
+  
+  
+  <!--Code:
+  <input type='text' id='code1'>
+  <input type='text' id='code2'>
+  <input type='text' id='code3'>
+  <br/>
+  <button onclick="crackCode()">Test Code</button>
+  <br/>
+  <div id='output'></div>-->
+
+
+  <!--First number: <input type='text' id='num1'>
+  Second number: <input type='text' id='num2'>
+  Operation: <select name="operation" id="op">
+    <option value="+">Add</option>
+    <option value="-">Subtract</option>
+    <option value="*">Multiply</option>
+    <option value="/">Divide</option>
+    <option value="%">Modulus</option>
+  </select>
+  <button onclick="performOperation()">Perform Operation</button>-->
+<!--  Number of Players: <input type='text' id='item'>-->
+<!--  <button onclick="startDeal()">Deal cards</button>-->
+<!--  <div id='output'></div>-->
+  
+  <script src="functions.js">
+    // var output = document.getElementById("output");
+    //
+    // var suites = ['spades', 'diams', 'clubs', 'hearts' ];
+    // var cardFace = ['2','3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
+    // var cards = [];
+    // var players = [];
+    //
+    //  function startDeal() {
+    //    players = [];
+    //    cards = [];
+    //    buildCards();
+    //    shuffleCards(cards);
+    //    //deal(cards);
+    //  }
+    //
+    //  function buildCards() {
+    //    for(var x in suites) {
+    //      //cards.push(x);
+    //      for( var c in cardFace) {
+    //        cards.push(suites[x],cardFace[c]);
+    //      }
+    //    }
+    //  }
+    //
+    //  function shuffleCards(cards) {
+    //     for(var x = 0; x < cards.length; x++) {
+    //       var rand = Math.floor(Math.random() * Math.floor(cards.length - 1));
+    //       var temp = cards[x];
+    //       cards[x] = cards[rand];
+    //       cards[rand] = temp;
+    //     }
+    //  }
+    //callbacks
+
+    //shopping list
+    // var shoppingList = [];
+
+    // function addItem() {
+    //   var item = document.getElementById("item");
+    //   shoppingList.push(item.value);
+    //   printShoppingList();
+    // }
+
+    // function printShoppingList() {
+    //   var html = '';
+    //   for(var x = 0; x < shoppingList.length; x++) {
+    //     html += (x+1) + '. ' +  shoppingList[x] + '<br/>';
+    //   }
+    //   output.innerHTML = html;
+    // }
+
+    //remove duplicates in array
+    // var testArray = ['Ed', 'Tony','Carol', 'Jessica', 'Stan', 'Jan', 'Hope', 'Fred', 'Jessica', 'Stan', 'Jan', 'Hope', 'Fred', 123, 234, 345, 456, 123,234, 345, 456 ];
+    // var noDups = []; 
+    // removeDups();
+
+    // function removeDups() {
+    //   for(var x = 0; x < testArray.length; x++) {
+    //     if(!noDups.includes(testArray[x])) {
+    //       noDups.push(testArray[x]);
+    //     }
+    //   }
+    // }
+    // output.innerHTML = 'Test Array: ' + testArray + '<br/>' + 'No Duplicates: ' + noDups;
+
+    
+    //shuffle array
+    // var userNames = ['Ed', 'Tony','Carol', 'Jessica', 'Stan', 'Jan', 'Hope', 'Fred'];
+    // function start() {
+    //   shuffleArray(userNames);output.innerHTML = userNames + '<br\>';
+    // }
+
+    // function shuffleArray(arrayToShuffle) {
+    //   for(var x = 0; x < arrayToShuffle.length; x++) {
+    //     var rand = Math.floor(Math.random() * Math.floor(arrayToShuffle.length - 1));
+    //     var temp = arrayToShuffle[x];
+    //     arrayToShuffle[x] = arrayToShuffle[rand];
+    //     arrayToShuffle[rand] = temp;
+    //   }
+
+    //   return arrayToShuffle;
+    // }
+
+    //anonomous function
+    // var realSecret = 'stupid';
+    // function start() {
+    //   setSecret(prompt("Guess the word"));
+    // }
+
+    // function setSecret(secret) {
+    //   if(secret == realSecret) {
+    //     output.innerHTML = 'You are correct';
+    //   }
+    //   else {
+    //     setSecret(prompt("Guess again"));
+    //   }
+    // }
+    // var code = [];
+    // var count = 0;
+    // var c1 = document.getElementById("code1");
+    // var c2 = document.getElementById("code2");
+    // var c3 = document.getElementById("code3");
+
+    // for (let index = 0; index < 3; index++) {
+    //   code[index] = Math.floor(Math.random() * Math.floor(9));  
+    // }
+    
+    // function crackCode() {
+    //   //create array of values
+    //   var entries = [c1.value, c2.value, c3.value ];
+    //   var results = [];
+
+    //   //check each value
+    //   for (let index = 0; index < entries.length; index++) {
+    //     results[index] = compare(code[index], entries[index]);
+    //   }
+
+    //   //write out results
+    //   output.innerHTML = results;
+
+    // }
+
+    // function compare(codeNum, entry) {
+    //   if(Number(codeNum) === Number(entry)) {
+    //     return Number(entry);
+    //   }
+    //   else if(Number(codeNum) < Number(entry)) {
+    //     return 'L';
+    //   }
+    //   else if(Number(codeNum) > Number(entry)) {
+    //     return 'H';
+    //   }
+
+    // }
+
+
+
+    // var num1 = document.getElementById("num1");
+    // var num2 = document.getElementById("num2");
+    // var op = document.getElementById("op");
+
+    // function performOperation() {
+    //   var total = eval(Number(num1.value) + op.value + Number(num2.value));
+    //   output.innerHTML = Number(num1.value) + ' ' + op.value + ' ' +  Number(num2.value) + ' = ' + total;
+    // }
+
+
+    // var superlatives = ['super', 'outstanding', 'teriffic', 'bombastic', 'wild', 'crazy', 'zany'];
+
+    // function getName() {
+    //   var name = prompt('What is your name?');
+    //   var selection = superlatives[Math.floor(Math.random() * Math.floor(7))]
+    //   output.innerHTML = 'Your name is ' + selection + ' ' + name;
+    // }
+
+    // var a = "Hello";
+    // cat();
+
+    // function cat() {
+    //   var b = 'World';
+    //   output.innerHTML = a + ' ' + b;
+    // }
+
+    // function firstFunction() {
+    //   output.innerHTML = 'This is my first function';
+    // }
+
+  </script>
+  
+</body>
+</html>
