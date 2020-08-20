@@ -3,43 +3,6 @@ let names = ['Ed', 'Mary', 'Bob', 'Cindy', 'Jessica', 'Scott']
 let colors = ['red', 'blue', 'yellow', 'green', 'purple', 'orange'];
 let clickCount = 1;
 
-buildTable = () => {
-    let table = document.createElement('table');
-    table.border = 1;
-    table.setAttribute('id', 'table1');
-    for (let row = 0; row < names.length; row++) {
-        let newrow = table.insertRow();
-        for (let col = 0; col < 3; col++) {
-            if(col == 0) {
-                let cell = newrow.insertCell();
-                cell.textContent = names[row];
-                cell.setAttribute('data-row', row);
-                cell.addEventListener('click',function(){
-                    updateCount(this);
-                });
-            }
-            else if(col == 1){
-                let indexCell = newrow.insertCell();
-                var link = document.createElement("a");
-                link.setAttribute("href", "udemy-javascript-course:deleteName(" + row + ");")
-                var linkText = document.createTextNode("Delete");
-                link.appendChild(linkText);
-                indexCell.appendChild(link);
-            }
-            else {
-                let emptyCell = newrow.insertCell();
-                var link2 = document.createElement("a");
-                link2.setAttribute("href", "udemy-javascript-course:editName(" + row + ");")
-                var linkText2 = document.createTextNode("Edit");
-                link2.appendChild(linkText2);
-                emptyCell.appendChild(link2);
-            }
-        }
-    }
-    document.body.insertBefore(table,document.getElementById('filler'));
-
-}
-
 deleteName = (t) => {
     names.splice(t, 1);
     let tab = document.getElementById('table1');
@@ -55,13 +18,13 @@ addPerson = () => {
     let row = table.rows[1].cloneNode(true);
     row.cells[0].innerHTML = person.value;
     let link1 = document.createElement("a");
-    link1.setAttribute("href", "udemy-javascript-course:deleteName(" + tableSize + ");");
+    link1.setAttribute("href", "javascript:deleteName(" + tableSize + ");");
     let linkText1 = document.createTextNode("Delete");
     link1.appendChild(linkText1);
     row.cells[1].innerHTML = '';
     row.cells[1].appendChild(link1);
     let link2 = document.createElement("a");
-    link2.setAttribute("href", "udemy-javascript-course:editName(" + tableSize + ");");
+    link2.setAttribute("href", "javascript:editName(" + tableSize + ");");
     let linkText2 = document.createTextNode("Edit");
     link2.appendChild(linkText2);
     row.cells[2].innerHTML = '';
@@ -86,6 +49,45 @@ editName = (t) => {
     }
 
 }
+
+buildTable = () => {
+    let table = document.createElement('table');
+    table.border = 1;
+    table.setAttribute('id', 'table1');
+    for (let row = 0; row < names.length; row++) {
+        let newrow = table.insertRow();
+        for (let col = 0; col < 3; col++) {
+            if(col == 0) {
+                let cell = newrow.insertCell();
+                cell.textContent = names[row];
+                cell.setAttribute('data-row', row);
+                cell.addEventListener('click',function(){
+                    updateCount(this);
+                });
+            }
+            else if(col == 1){
+                let indexCell = newrow.insertCell();
+                var link = document.createElement("a");
+                link.setAttribute("href", "javascript:deleteName(" + row + ");")
+                var linkText = document.createTextNode("Delete");
+                link.appendChild(linkText);
+                indexCell.appendChild(link);
+            }
+            else {
+                let emptyCell = newrow.insertCell();
+                var link2 = document.createElement("a");
+                link2.setAttribute("href", "javascript:editName(" + row + ");")
+                var linkText2 = document.createTextNode("Edit");
+                link2.appendChild(linkText2);
+                emptyCell.appendChild(link2);
+            }
+        }
+    }
+    document.body.insertBefore(table,document.getElementById('filler'));
+
+}
+
+
 
 let textItem = document.getElementById('textItem');
 let msg = document.getElementById('message');

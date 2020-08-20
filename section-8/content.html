@@ -25,12 +25,6 @@
   </style>
 </head>
 <body id="body">
-  <div id='wrapper'></div>
-
-  <input type='button' class='btn' onclick="start()" value='Start'>
-  <div id='msg1'>Welcome</div>
-  <div id='msg2'>Click the Start button</div>
-  <br/>
   <h3>Drag and Drop</h3>
   <div class="box" ondrop="startDrop()" ondragover="noDrop()">1
     <div id="getElement" ondrag="startDrag()" draggable="true"> Drag me please</div>
@@ -70,6 +64,14 @@
   <div>
     <img src="" id="image">
   </div>
+  <br/>
+  <h3>Guess the name</h3>
+  <div id='wrapper'></div>
+
+  <input type='button' class='btn' onclick="start()" value='Start'>
+  <div id='msg1'>Welcome</div>
+  <div id='msg2'>Click the Start button</div>
+  <span id="filler"></span>
   
 
   <!--<form action="" name="nameForm">

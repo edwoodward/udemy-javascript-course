@@ -8,6 +8,7 @@
                 font-size: 1em;
                 padding: 15px;
                 color: white;
+                width: 100px;
             }
             
             .btn.hover {
@@ -27,6 +28,7 @@
     </head>
     <body>
         <h3>Matching Game</h3>
+        <p>Click the start button, then click on 2 boxes to find a match</p>
         <div id="msg"></div>
         <div id="wrapper">
             <div id="start" class="btn">Start</div>
@@ -50,7 +52,7 @@
 <!--            <input type="number" id="digits" value="12345">-->
             Find: <input type="text" id="find"><br/>
             Replace: <input type="text" id="replace"><br/>
-            <input type='button' id="btn1" onclick="findAndReplace()" value="Finc and Replace">
+            <input type='button' id="btn1" onclick="findAndReplace()" value="Find and Replace">
         </form>
     
         <script src="intermediate.js">

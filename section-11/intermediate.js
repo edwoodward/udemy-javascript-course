@@ -1,6 +1,5 @@
 //game
 let msg = document.getElementById('msg');
-//let message = document.getElementById('message');
 let score = document.getElementById('score');
 let gameBoard = document.getElementById('gameboard');
 let playLockout = false;

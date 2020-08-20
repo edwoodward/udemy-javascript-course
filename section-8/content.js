@@ -1,4 +1,5 @@
 let output = document.getElementById('wrapper');
+let filler = document.getElementById('filler')
 
 let holder = [];
 const names = ['Ed', 'Mary', 'Bob', 'Cindy', 'Jessica', 'Scott']
@@ -32,7 +33,7 @@ buildBoxes = () => {
         divElement.innerHTML = 'Hidden ' + x;
         spanElement.appendChild(divElement);
     }
-    body.appendChild(spanElement);
+    body.insertBefore(filler,spanElement);
 }
 
 updateText = (t, text) => {

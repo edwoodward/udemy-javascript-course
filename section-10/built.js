@@ -5,7 +5,7 @@ let gameboard = document.querySelector('.gameboard');
 
 build = () => {
     let h1 = document.createElement('h1');
-    h1.innerHTML = 'Hit the computer';
+    h1.innerHTML = 'Wack the computer';
     gameboard.appendChild(h1);
     for(let i = 0; i < 6; i++){
         buildComputer();
@@ -175,6 +175,7 @@ countdown = () => {
 //word scramble game
 const words = ['happy', 'code', 'bunny', 'dog', 'cat'];
 let scramble = document.getElementById('scramble');
+let btn5 = document.getElementById('btn5');
 
 scrambleWord = () => {
     //get random word
@@ -220,6 +221,7 @@ guessWord = () => {
 
 window.addEventListener('load', function(){
     build();
-    scrambleWord();
+
 });
+btn5.addEventListener('click',scrambleWord);
 

@@ -1,5 +1,4 @@
 //canvas drawing
-
 let msg = document.getElementById('msg');
 let canvas1 = document.getElementById('canvas1');
 let ctx1 = canvas1.getContext('2d');
@@ -66,9 +65,7 @@ let pos2 = {x:0, y:50};
 let pos3 = {x:50, y:100};
 let canvas3 = document.getElementById('canvas3');
 let ctx3 = canvas3.getContext('2d');
-// window.addEventListener('load', (event) => {
-//     draw();
-// });
+let circlesBtn = document.getElementById('circles');
 
 
 function drawCircles() {
@@ -99,9 +96,6 @@ function drawCircles() {
     window.setTimeout(drawCircles, 100)
 }
 
-
-
-
 save.addEventListener('click', function(){
     let downloadLink = document.createElement('a');
     downloadLink.setAttribute('download', 'CanvasAsImage.png');
@@ -115,9 +109,8 @@ save.addEventListener('click', function(){
 clear.addEventListener('click', function(){
     ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
 })
-//window.addEventListener('load', init);
 window.addEventListener('load', (event) => {
-    drawCircles();
     init();
 })
 imgLoader.addEventListener('change',uploadImage, false);
+circlesBtn.addEventListener('click', drawCircles);
