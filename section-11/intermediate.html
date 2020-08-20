@@ -26,6 +26,7 @@
 
     </head>
     <body>
+        <h3>Matching Game</h3>
         <div id="msg"></div>
         <div id="wrapper">
             <div id="start" class="btn">Start</div>
@@ -33,9 +34,10 @@
             <div id="message"></div>
             <div id="gameboard"></div>
         </div>
+        <br/>
+        <h3>Find and Replace</h3>
         
-        
-        <!--<form>
+        <form>
             <p id="text">
                 UNIX-like systems are amazing operating system designs. Even after many decades, the
                 UNIX-style architecture for operating systems serves as one of the best designs. One of the
@@ -45,131 +47,135 @@
                 interpreter-based programming languages. Shell scripts are files in which we write a sequence
                 of commands that we need to perform. And the script file is executed using the shell utility.
             </p>
-&lt;!&ndash;            <input type="number" id="digits" value="12345">&ndash;&gt;
+<!--            <input type="number" id="digits" value="12345">-->
             Find: <input type="text" id="find"><br/>
             Replace: <input type="text" id="replace"><br/>
             <input type='button' id="btn1" onclick="findAndReplace()" value="Finc and Replace">
-        </form>-->
+        </form>
     
-        <script>
-            //game
-            let msg = document.getElementById('msg');
-            let message = document.getElementById('message');
-            let score = document.getElementById('score');
-            let gameBoard = document.getElementById('gameboard');
-            let playLockout = false;
-            let gamePlay = false;
-            let tileImages = [];
-            let tileArray = [];
-            let tilesFlipped = [];
-            let cardFlipped = -1
-            let timer;
-            
-            document.getElementById('start').addEventListener('click',function(){
-                startGame();
-            });
-            
-            function startGame() {
-                document.getElementById('start').style.visibility='hidden';
-                msg.innerHTML = 'It is working';
-                if(!gamePlay) {
-                    gamePlay = true;
-                    buildTilesArray();
-                    tileArray = tileImages.concat(tileImages);
-                    shuffleTiles(tileArray);
-                    buildBoard();
-                }
-            }
-            
-            function buildTilesArray() {
-                for(let i = 0;i<7;i++) {
-                    tileImages.push(i+'.jpg');
-                }
-            }
-
-            function shuffleTiles(tileImages) {
-                for(var x = 0; x < tileImages.length; x++) {
-                    var rand = Math.floor(Math.random() * Math.floor(tileImages.length - 1));
-                    var temp = tileImages[x];
-                    tileImages[x] = tileImages[rand];
-                    tileImages[rand] = temp;
-                }
-            }
-            
-            function buildBoard() {
-                let html = '';
-                let x = 0;
-                tileArray.forEach(function(e) {
-                    html += '<div class="gameTile">';
-                    html += ' <img id="card' + x + '" src="http://via.placeholder.com/150/000000/ffffff?text=click" ' +
-                        'onclick="pickCard(' + x + ',this)" class="flipImage"></div>';
-                    x++;
-                    
-                })
-                //console.log(html);
-                gameBoard.innerHTML = html;
-            }
-            
-            function pickCard(index, t) {
-                if(!playLockout && !isInArray(t.id, tilesFlipped)) {
-                    if (cardFlipped >= 0) {
-                        cardFlip(index, t);
-                        playLockout = true;
-                        if (isAMatch()) {
-                            msg.innerHTML = 'Match Found!';
-                            cardFlipped = -1;
-                            playLockout = false;
-                            checkGameOver();
-                        } else {
-                            msg.innerHTML = 'No match';
-                            timer = setInterval(hideCard, 1000);
-                        }
-                    } else {
-                        cardFlipped = index;
-                        cardFlip(index, t);
-                    }
-                }
-            }
-            
-            function isInArray(index, array) {
-                return array.indexOf(index) > -1;
-            }
-            
-            function cardFlip(index, target){
-                target.src = "http://via.placeholder.com/250/ffffff/000000?text=" + tileArray[index];
-                tilesFlipped.push(target.id);
-            }
-            
-            function hideCard() {
-                for (var x = 0; x < 2; x++) {
-                    var vid = tilesFlipped.pop();
-                    document.getElementById(vid).src = 'http://via.placeholder.com/250/000000/ffffff?text=click';
-                }
-                clearInterval(timer);
-                cardFlipped = -1;
-                playLockout = false;
-                msg.innerHTML = "Select Again";
-            }
-            
-            function checkSrc(src) {
-                return document.getElementById(src).src
-            }
-            
-            function checkGameOver() {
-                if(tilesFlipped.length === tileArray.length){
-                    msg.innerHTML = 'Game Over!';
-                    document.getElementById('start').style.visibility='visible';
-                    gamePlay = false;
-                    tilesFlipped = [];
-                    tileArray = [];
-                    tileImages = [];
-
-                }
-            }
-            
-            function isAMatch() {
-                checkSrc(tilesFlipped[tilesFlipped.length - 1]) === checkSrc(tilesFlipped[tilesFlipped.length - 2])
-            }
+        <script src="intermediate.js">
+            // //game
+            // let msg = document.getElementById('msg');
+            // let message = document.getElementById('message');
+            // let score = document.getElementById('score');
+            // let gameBoard = document.getElementById('gameboard');
+            // let playLockout = false;
+            // let gamePlay = false;
+            // let tileImages = [];
+            // let tileArray = [];
+            // let tilesFlipped = [];
+            // let cardFlipped = -1
+            // let timer;
+            //
+            // document.getElementById('start').addEventListener('click',function(){
+            //     startGame();
+            // });
+            //
+            // function startGame() {
+            //     document.getElementById('start').style.visibility='hidden';
+            //     msg.innerHTML = 'It is working';
+            //     if(!gamePlay) {
+            //         gamePlay = true;
+            //         buildTilesArray();
+            //         tileArray = tileImages.concat(tileImages);
+            //         shuffleTiles(tileArray);
+            //         buildBoard();
+            //     }
+            // }
+            //
+            // function buildTilesArray() {
+            //     for(let i = 0;i<7;i++) {
+            //         tileImages.push(i+'.jpg');
+            //     }
+            // }
+            //
+            // function shuffleTiles(tileImages) {
+            //     for(var x = 0; x < tileImages.length; x++) {
+            //         var rand = Math.floor(Math.random() * Math.floor(tileImages.length - 1));
+            //         var temp = tileImages[x];
+            //         tileImages[x] = tileImages[rand];
+            //         tileImages[rand] = temp;
+            //     }
+            // }
+            //
+            // function buildBoard() {
+            //     let html = '';
+            //     let x = 0;
+            //     tileArray.forEach(function(e) {
+            //         html += '<div class="gameTile">';
+            //         html += ' <img id="card' + x + '" src="http://via.placeholder.com/150/000000/ffffff?text=click" ' +
+            //             'onclick="pickCard(' + x + ',this)" class="flipImage"></div>';
+            //         x++;
+            //
+            //     })
+            //     //console.log(html);
+            //     gameBoard.innerHTML = html;
+            // }
+            //
+            // function pickCard(index, t) {
+            //     if(!playLockout && !isInArray(t.id, tilesFlipped)) {
+            //         if (cardFlipped >= 0) {
+            //             cardFlip(index, t);
+            //             playLockout = true;
+            //             let match = isAMatch();
+            //             console.log('match: ' + match);
+            //             if (match) {
+            //                 msg.innerHTML = 'Match Found!';
+            //                 cardFlipped = -1;
+            //                 playLockout = false;
+            //                 checkGameOver();
+            //             } else {
+            //                 msg.innerHTML = 'No match';
+            //                 timer = setInterval(hideCard, 1000);
+            //             }
+            //         } else {
+            //             cardFlipped = index;
+            //             cardFlip(index, t);
+            //         }
+            //     }
+            // }
+            //
+            // function isInArray(index, array) {
+            //     return array.indexOf(index) > -1;
+            // }
+            //
+            // function cardFlip(index, target){
+            //     target.src = "http://via.placeholder.com/250/ffffff/000000?text=" + tileArray[index];
+            //     tilesFlipped.push(target.id);
+            // }
+            //
+            // function hideCard() {
+            //     for (var x = 0; x < 2; x++) {
+            //         var vid = tilesFlipped.pop();
+            //         document.getElementById(vid).src = 'http://via.placeholder.com/250/000000/ffffff?text=click';
+            //     }
+            //     clearInterval(timer);
+            //     cardFlipped = -1;
+            //     playLockout = false;
+            //     msg.innerHTML = "Select Again";
+            // }
+            //
+            // function checkSrc(src) {
+            //     return (document.getElementById(src).src).trim()
+            // }
+            //
+            // function checkGameOver() {
+            //     if(tilesFlipped.length === tileArray.length){
+            //         msg.innerHTML = 'Game Over!';
+            //         document.getElementById('start').style.visibility='visible';
+            //         gamePlay = false;
+            //         tilesFlipped = [];
+            //         tileArray = [];
+            //         tileImages = [];
+            //
+            //     }
+            // }
+            //
+            // function isAMatch() {
+            //     let src1 = tilesFlipped[tilesFlipped.length - 1];
+            //     let src2 = tilesFlipped[tilesFlipped.length - 2];
+            //     return document.getElementById(src1).src === document.getElementById(src2).src
+            // }
             
             
             
