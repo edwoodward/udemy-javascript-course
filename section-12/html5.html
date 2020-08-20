@@ -46,77 +46,84 @@
     </head>
     <body>
 <!--        <div id="cart"></div>-->
+        <h3>Select a color and draw with your mouse</h3>
         <input type="color" id="color">
         <input type="button" id="save" value = 'Save'>
         <input type="button" id="clear" value="Clear">
         <div id="msg"></div>
+        <canvas id="canvas1" width="500" height="500"></canvas>
+        <br/>
+        <h3>Add File to Canvas</h3>
+        <input type="file" id="imgLoader">
+        <canvas id="canvas2"></canvas>
 <!--        <input type="file" multiple onchange="uploadFiles(this.files)">-->
 <!--        <input type="file" id="imgLoader">-->
         
-        <canvas id="canvas1"></canvas>
-        <!--<canvas id="canvas2"></canvas>
-        <canvas id="canvas3"></canvas>-->
         
-        <script>
+        <br/>
+        <h3>Draw circles on Canvas</h3>
+        <canvas id="canvas3" width="500" height="500"></canvas>
+        
+        <script src="html5.js">
             //save image from canvas and clear canvas
-            let msg = document.getElementById('msg');
-            let canvas1 = document.getElementById('canvas1');
-            let color = document.getElementById('color');
-            let colorValue = 'blue';
-            let save = document.getElementById('save');
-            save.addEventListener('click', function(){
-                let downloadLink = document.createElement('a');
-                downloadLink.setAttribute('download', 'CanvasAsImage.png');
-                //let canvas = document.getElementById('myCanvas');
-                canvas1.toBlob(function(blob) {
-                    let url = URL.createObjectURL(blob);
-                    downloadLink.setAttribute('href', url);
-                    downloadLink.click();
-                });
-            })
-            let clear = document.getElementById('clear');
-            clear.addEventListener('click', function(){
-                ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
-            })
-            
-            canvas1.width = 500;
-            canvas1.height = 500;
-            let ctx1 = canvas1.getContext('2d');
-            let pos = {x:0, y:0};
-            window.addEventListener('load', (event) => {
-                init();
-            });
-            
-            function init() {
-                canvas1.addEventListener('mousemove',draw);
-                canvas1.addEventListener('mousemove',setPosition);
-                canvas1.addEventListener('mouseenter',setPosition);
-                color.addEventListener('change', setColor);
-            }
-            
-            function setColor(e) {
-                //console.dir(e.target);
-                colorValue = e.target.value;
-            }
-            
-            function draw(e) {
-                if(e.buttons !==1) return;
-                //msg.innerHTML = 'x = ' + pos.x + ' y = ' + pos.y;
-                ctx1.beginPath();
-                ctx1.moveTo(pos.x, pos.y);
-                setPosition(e);
-                ctx1.lineTo(pos.x, pos.y);
-                ctx1.strokeStyle = colorValue;
-                ctx1.stroke();
-            
-            }
-            
-            function setPosition(e) {
-                //console.log(e);
-                pos.x = e.pageX;
-                pos.y = e.pageY;
-                //msg.innerHTML = 'x = ' + pos.x + ' y = ' + pos.y;
-            }
+            // let msg = document.getElementById('msg');
+            // let canvas1 = document.getElementById('canvas1');
+            // let color = document.getElementById('color');
+            // let colorValue = 'blue';
+            // let save = document.getElementById('save');
+            // save.addEventListener('click', function(){
+            //     let downloadLink = document.createElement('a');
+            //     downloadLink.setAttribute('download', 'CanvasAsImage.png');
+            //     //let canvas = document.getElementById('myCanvas');
+            //     canvas1.toBlob(function(blob) {
+            //         let url = URL.createObjectURL(blob);
+            //         downloadLink.setAttribute('href', url);
+            //         downloadLink.click();
+            //     });
+            // })
+            // let clear = document.getElementById('clear');
+            // clear.addEventListener('click', function(){
+            //     ctx1.clearRect(0, 0, canvas1.width, canvas1.height);
+            // })
+            //
+            // canvas1.width = 500;
+            // canvas1.height = 500;
+            // let ctx1 = canvas1.getContext('2d');
+            // let pos = {x:0, y:0};
+            // window.addEventListener('load', (event) => {
+            //     init();
+            // });
+            //
+            // function init() {
+            //     canvas1.addEventListener('mousemove',draw);
+            //     canvas1.addEventListener('mousemove',setPosition);
+            //     canvas1.addEventListener('mouseenter',setPosition);
+            //     color.addEventListener('change', setColor);
+            // }
+            //
+            // function setColor(e) {
+            //     //console.dir(e.target);
+            //     colorValue = e.target.value;
+            // }
+            //
+            // function draw(e) {
+            //     if(e.buttons !==1) return;
+            //     //msg.innerHTML = 'x = ' + pos.x + ' y = ' + pos.y;
+            //     ctx1.beginPath();
+            //     ctx1.moveTo(pos.x, pos.y);
+            //     setPosition(e);
+            //     ctx1.lineTo(pos.x, pos.y);
+            //     ctx1.strokeStyle = colorValue;
+            //     ctx1.stroke();
+            //
+            // }
+            //
+            // function setPosition(e) {
+            //     //console.log(e);
+            //     pos.x = e.pageX;
+            //     pos.y = e.pageY;
+            //     //msg.innerHTML = 'x = ' + pos.x + ' y = ' + pos.y;
+            // }
             
             //load image into canvas
             // let imgLoader = document.getElementById('imgLoader');
