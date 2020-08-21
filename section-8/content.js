@@ -11,6 +11,7 @@ start = () => {
         document.getElementById('msg1').innerHTML = 'Welcome'
     }
     setNameToLookFor();
+
     document.getElementById('msg2').innerHTML = 'Guess selected name by clicking on the box';
     holder = names.slice();
     holder.sort(function(a,b){
@@ -33,7 +34,7 @@ buildBoxes = () => {
         divElement.innerHTML = 'Hidden ' + x;
         spanElement.appendChild(divElement);
     }
-    body.insertBefore(filler,spanElement);
+    body.appendChild(spanElement);
 }
 
 updateText = (t, text) => {
@@ -53,6 +54,16 @@ handleClick = (t) => {
         document.getElementById('msg1').innerHTML = 'Sad Trombone';
         document.getElementById('msg2').innerHTML = t.innerHTML + ' was not the correct answer'
 
+    }
+}
+
+function changeImg(t){
+    if(t.src === 'https://via.placeholder.com/150/2288FF/FFFFFF') {
+        t.src = 'https://via.placeholder.com/150/FFFF00/000000';
+    }
+    else
+    {
+        t.src = 'https://via.placeholder.com/150/2288FF/FFFFFF';
     }
 }
 
